@@ -32,11 +32,15 @@ const PropertyTenants = () => {
   const { data: payments, isLoading: paymentsLoading } =
     useGetPaymentsQuery(propertyId);
 
+    console.log("Property Data: ", property);
+    console.log("Leases Data: ", leases);
+    console.log("Payments Data: ", payments);
+
   if (propertyLoading || leasesLoading || paymentsLoading) return <Loading />;
 
   const getCurrentMonthPaymentStatus = (leaseId: number) => {
     const currentDate = new Date();
-    const currentMonthPayment = payments?.find(
+    const currentMonthPayment = leases?.find(
       (payment) =>
         payment.leaseId === leaseId &&
         new Date(payment.dueDate).getMonth() === currentDate.getMonth() &&
